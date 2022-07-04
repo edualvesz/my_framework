@@ -1,6 +1,8 @@
-<?php 
+<?php
 
-class Model
+use app\system\testeModel;
+
+class Model extends testeModel
 {
 
     public $db;
