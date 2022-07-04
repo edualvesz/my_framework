@@ -1,9 +1,9 @@
 <?php 
 
-class indexModel extends Model
-{
+namespace app\models;
 
-    
+class testeModel 
+{
 
 }
 

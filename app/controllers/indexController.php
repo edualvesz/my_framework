@@ -1,8 +1,10 @@
 <?php 
 
-class indexController 
+namespace app\controllers;
+
+class testeController
 {
-    
+
 }
 
 ?>
