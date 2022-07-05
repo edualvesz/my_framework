@@ -54,7 +54,7 @@ require_once '../../vendor/autoload.php';
                     alert('Cadastrado com sucesso!')
                     //fecha o modal apos quase meio segundo
                     setTimeout(function(){
-                        $('#salvaDados').mpdal('hide')
+                        $('#salvaDados').modal('hide')
                     }, 400)
                 })
                 //limpa os campos
@@ -62,12 +62,11 @@ require_once '../../vendor/autoload.php';
                 document.getElementById('email').value=''
 
                 //funcao para recarregar a pagina apos enviar para o banco
-                var btn = document.querySelector('#salvar')
-                btn.addEventListener('click', function(){
-                    location.reload()
-                })
+                // var btn = document.querySelector('#salvar')
+                // btn.addEventListener('click', function(){
+                //     location.reload()
+                // })
             })
-       
     </script>
     <title>Document</title>
 </head>
