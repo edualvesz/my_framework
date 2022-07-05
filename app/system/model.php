@@ -1,16 +1,15 @@
 <?php
 
-use app\system\testeModel;
+use app\controllers\testeController;
 
-class Model extends testeModel
+
+class Model 
 {
-
     public $db;
 
     public function __construct(){
         $this->db = new PDO('mysql:host=127.0.0.1;dbname=db_teste', 'root', '');
     }
-
 }
 
 ?>

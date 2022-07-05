@@ -1,9 +1,9 @@
 <?php 
 
-namespace app\models;
-namespace app\system;
+require '../../system/model.php';
+//namespace app\system;
 
-class testeModel 
+class testeModel extends Model 
 {
 
 }
