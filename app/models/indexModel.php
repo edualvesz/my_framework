@@ -1,13 +1,16 @@
 <?php 
 
-require '../../system/model.php';
-//namespace app\system;
-use app\controllers;
+namespace indexModel;
+
+//use indexController\testeController;
+use connModel\Model;
+//use index\instancia;
+use PDO;
 
 class testeModel extends Model 
 {
-    public function salvaBanco(){
-        $query = $this->db->prepare("INSERT INTO cupom_embaixador (cupom, ano_referencia, email) VALUES (:cupom, :ano, :email)");
+    public function salvaBanco($cupom, $email){
+        $query = $this->db->prepare("INSERT INTO cupom_embaixador (cupom, email) VALUES (:cupom, :email)");
         $query->bindValue(':cupom', $cupom, PDO::PARAM_STR);
         //$query->bindVAlue(':ano', $ano,  PDO::PARAM_STR);
         $query->bindVAlue(':email', $email,  PDO::PARAM_STR);

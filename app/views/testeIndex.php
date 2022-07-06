@@ -1,12 +1,23 @@
 <?php 
 
-use app\controllers\testeController;
-use app\models\testeModel;
+// use app\controllers\testeController;
+// use app\models\testeModel;
 
-require_once '../../vendor/autoload.php';
+//require_once '../../vendor/autoload.php';
 
 // $a = new testeController();
 // $b = new testeModel();
+
+//require '../../vendor/autoload.php';
+// require '../models/indexModel.php';
+// require '../controllers/indexController.php';
+
+
+use indexController\testeController;
+use indexModel\testeModel;
+
+$indexController = new testeController();
+$indexModel = new testeModel();
 ?>
 
 <!DOCTYPE html>

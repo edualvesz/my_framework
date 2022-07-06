@@ -1,7 +1,8 @@
 <?php
+namespace connModel;
 
-use app\controllers\testeController;
-
+use indexModel\testeModel;
+use PDO;
 
 class Model 
 {
