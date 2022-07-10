@@ -1,9 +1,7 @@
 <?php 
 
-
-namespace indexController;
-use indexModel\testeModel;
-use index;
+namespace app\controllers;
+use app\models\testeModel;
 
 
 

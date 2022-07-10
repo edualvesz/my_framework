@@ -1,7 +1,7 @@
 <?php
-namespace connModel;
+namespace app\system;
 
-use indexModel\testeModel;
+use app\models\testeModel;
 use PDO;
 
 class Model 

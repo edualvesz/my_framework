@@ -1,13 +1,11 @@
 <?php 
 
-namespace indexModel;
+namespace app\models;
 
-//use indexController\testeController;
-use connModel\Model;
-//use index\instancia;
+use app\system\Model;
 use PDO;
 
-class testeModel extends Model 
+class testeModel extends Model
 {
     public function salvaBanco($cupom, $email){
         $query = $this->db->prepare("INSERT INTO cupom_embaixador (cupom, email) VALUES (:cupom, :email)");
