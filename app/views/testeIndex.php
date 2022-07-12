@@ -7,12 +7,10 @@ require_once '../../vendor/autoload.php';
 require_once '../controllers/indexController.php';
 require_once '../models/indexModel.php';
 require_once '../system/model.php';
-//require_once '../../public/bootstrap.php';
 
 $indexController = new testeController();
 $indexModel = new testeModel();
 
-router();
 ?>
 
 <!DOCTYPE html>
@@ -36,43 +34,43 @@ router();
         document.getElementById('email')
         }
 
-        //vai impedir que a pagina seja recarregada
-        $('#form').submit(function(e){
-            e.preventDefault()
+        // //vai impedir que a pagina seja recarregada
+        // $('#form').submit(function(e){
+        //     e.preventDefault()
 
-            //captura o valor dos inputs
-            var cupom = $('#cupom').val()
-            var email = $('#email').val()
+        //     //captura o valor dos inputs
+        //     var cupom = $('#cupom').val()
+        //     var email = $('#email').val()
 
-        })
-            //funcao para registrar o cupom
-            $(document).ready(function(){
-                $('#salvar').on('click', function(salvaCupom){
-                    //alert('COROI')
-                    $.ajax({
-                        url: 'indexController/salvaCupom',
-                        type: 'POST',
-                        data: {
-                            cupom:$('#cupom').val(),
-                            email:$('#email').val()
-                        },
-                    })
-                    alert('Cadastrado com sucesso!')
-                    //fecha o modal apos quase meio segundo
-                    setTimeout(function(){
-                        $('#salvaDados').modal('hide')
-                    }, 400)
-                })
-                //limpa os campos
-                document.getElementById('cupom').value=''
-                document.getElementById('email').value=''
+        // })
+        //     //funcao para registrar o cupom
+        //     $(document).ready(function(){
+        //         $('#salvar').on('click', function(salvaCupom){
+        //             //alert('COROI')
+        //             $.ajax({
+        //                 url: 'testeController/salvaCupom',
+        //                 type: 'POST',
+        //                 data: {
+        //                     cupom:$('#cupom').val(),
+        //                     email:$('#email').val()
+        //                 },
+        //             })
+        //             alert('Cadastrado com sucesso!')
+        //             //fecha o modal apos quase meio segundo
+        //             setTimeout(function(){
+        //                 $('#salvaDados').modal('hide')
+        //             }, 400)
+        //         })
+        //         //limpa os campos
+        //         document.getElementById('cupom').value=''
+        //         document.getElementById('email').value=''
 
-                //funcao para recarregar a pagina apos enviar para o banco
-                // var btn = document.querySelector('#salvar')
-                // btn.addEventListener('click', function(){
-                //     location.reload()
-                // })
-            })
+        //         //funcao para recarregar a pagina apos enviar para o banco
+        //         // var btn = document.querySelector('#salvar')
+        //         // btn.addEventListener('click', function(){
+        //         //     location.reload()
+        //         // })
+        //     })
     </script>
     <title>Document</title>
 </head>
@@ -80,6 +78,7 @@ router();
     <h4>Chamar modal</h4><br>
     <button type="button" class="btn btn-light" onclick="chamaModal()">Abrir modal</button>
 </body>
+<script src="../../public/js/custom.js"></script>
 </html>
 
 <!-- ===============modal================= -->
@@ -93,22 +92,22 @@ router();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="" id="form">
+      <form id="form">
             <input class="form-control" type="hidden" id="id">		
             <div class="form-group row">
                 <div class="col-sm-60">
-                    <input type="text" class="form-control" id="cupom" placeholder="cupom" maxlength="50"  required="required" value="">
+                    <input type="text" class="form-control" id="cupom" placeholder="cupom" maxlength="50" value="">
                 </div>
             </div><br>
             <div class="form-group row">
                 <div class="col-sm-60">
-                    <input type="text" class="form-control" id="email" placeholder="email" maxlength="50"  required="required" value="">
+                    <input type="text" class="form-control" id="email" placeholder="email" maxlength="50" value="">
                 </div>
             </div><br>
             <div id="mensagens"></div> 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" id="salvar" class="btn btn-primary">Enviar</button>
+                <button type="submit" id="salvar" class="btn btn-primary">Enviar</button>
             </div>
         </form>
       </div>

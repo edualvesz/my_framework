@@ -3,8 +3,6 @@
 namespace app\controllers;
 use app\models\testeModel;
 
-
-
 class testeController
 {
 
