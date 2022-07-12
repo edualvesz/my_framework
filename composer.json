@@ -1,7 +1,11 @@
 {
+    "require": {},
     "autoload":{
         "psr-4":{
            "app\\" : "app/"
-        }
-    }
+        },
+        "files": [
+            "app/router/router.php"
+        ]
+    }       
 }

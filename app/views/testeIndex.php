@@ -7,9 +7,12 @@ require_once '../../vendor/autoload.php';
 require_once '../controllers/indexController.php';
 require_once '../models/indexModel.php';
 require_once '../system/model.php';
+//require_once '../../public/bootstrap.php';
 
 $indexController = new testeController();
 $indexModel = new testeModel();
+
+router();
 ?>
 
 <!DOCTYPE html>
