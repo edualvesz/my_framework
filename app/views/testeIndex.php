@@ -1,18 +1,19 @@
 <?php 
 
+
 use app\controllers\testeController;
 use app\models\testeModel;
+
+error_reporting(E_ALL ^ E_NOTICE);
 
 require_once '../../vendor/autoload.php';
 require_once '../controllers/indexController.php';
 require_once '../models/indexModel.php';
 require_once '../system/model.php';
-//require_once '../../public/bootstrap.php';
 
 $indexController = new testeController();
-$indexModel = new testeModel();
+//$indexController->salvaBanco();
 
-router();
 ?>
 
 <!DOCTYPE html>
@@ -38,41 +39,88 @@ router();
 
         //vai impedir que a pagina seja recarregada
         $('#form').submit(function(e){
-            e.preventDefault()
-
-            //captura o valor dos inputs
+        e.preventDefault()
+        // //captura o valor dos inputs
             var cupom = $('#cupom').val()
             var email = $('#email').val()
-
         })
-            //funcao para registrar o cupom
-            $(document).ready(function(){
-                $('#salvar').on('click', function(salvaCupom){
-                    //alert('COROI')
-                    $.ajax({
-                        url: 'indexController/salvaCupom',
-                        type: 'POST',
-                        data: {
-                            cupom:$('#cupom').val(),
-                            email:$('#email').val()
-                        },
-                    })
-                    alert('Cadastrado com sucesso!')
-                    //fecha o modal apos quase meio segundo
-                    setTimeout(function(){
-                        $('#salvaDados').modal('hide')
-                    }, 400)
+
+        function cadastrarCupom(){
+            var cupom = $('#cupom').val()
+            var email = $('#email').val()
+            if(cupom == '' || email == ''){
+                alert('Existem campos obrigatórios não preenchidos!')
+            } else {
+                var dados = new FormData()
+
+                dados.append('cupom', cupom)
+                dados.append('email', email)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '../controllers/indexController.php',
+                    data: dados,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function(data) {
+                        alert('Cadastrado com sucesso!')
+                            //fecha o modal apos quase meio segundo
+                            setTimeout(function(){
+                                $('#salvaDados').modal('hide')
+                            }, 400)
+                    },
                 })
                 //limpa os campos
                 document.getElementById('cupom').value=''
                 document.getElementById('email').value=''
+            }
+            //funcao para recarregar a pagina apos enviar para o banco
+                // var btn = document.querySelector('#salvaDados')
+                // btn.addEventListener('click', function(){
+                //     location.reload()
+                // })
+                // $('#form').submit(function(e){
+                //     e.preventDefault()
+                // })
+            }
+
+        //vai impedir que a pagina seja recarregada
+        // $('#form').submit(function(e){
+        //     e.preventDefault()
+
+            // //captura o valor dos inputs
+            // var cupom = $('#cupom').val()
+            // var email = $('#email').val()
+
+        //})
+            //funcao para registrar o cupom
+            // $(document).ready(function(){
+            //     $('#salvar').on('click', function(salvaCupom){
+            //         //alert('COROI')
+            //         $.ajax({
+            //             type: 'POST',
+            //             url: '../controllers/indexController.php/salvaBanco',
+            //             data: {
+            //                 cupom:$('#cupom').val(),
+            //                 email:$('#email').val()
+            //             },
+            //         })
+            //         alert('Cadastrado com sucesso!')
+            //         //fecha o modal apos quase meio segundo
+            //         setTimeout(function(){
+            //             $('#salvaDados').modal('hide')
+            //         }, 400)
+            //     })
+            //     //limpa os campos
+            //     document.getElementById('cupom').value=''
+            //     document.getElementById('email').value=''
 
                 //funcao para recarregar a pagina apos enviar para o banco
                 // var btn = document.querySelector('#salvar')
                 // btn.addEventListener('click', function(){
                 //     location.reload()
                 // })
-            })
+           // })
     </script>
     <title>Document</title>
 </head>
@@ -93,7 +141,7 @@ router();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="" id="form">
+      <form action="testeIndex.php" id="form" method="POST">
             <input class="form-control" type="hidden" id="id">		
             <div class="form-group row">
                 <div class="col-sm-60">
@@ -108,7 +156,7 @@ router();
             <div id="mensagens"></div> 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" id="salvar" class="btn btn-primary">Enviar</button>
+                <button type="button" id="salvaDados" class="btn btn-primary" onclick="cadastrarCupom()">Enviar</button>
             </div>
         </form>
       </div>
