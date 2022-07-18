@@ -12,7 +12,7 @@ require_once '../models/indexModel.php';
 require_once '../system/model.php';
 
 $indexController = new testeController();
-//$indexController->salvaBanco();
+$indexController->salvaBanco();
 
 ?>
 
@@ -32,7 +32,7 @@ $indexController = new testeController();
     <script>
         //abre o modal
         function chamaModal(){
-        $('#salvaDados').modal('show')
+        $('#chamaModal').modal('show')
         document.getElementById('cupom')
         document.getElementById('email')
         }
@@ -45,82 +45,50 @@ $indexController = new testeController();
             var email = $('#email').val()
         })
 
-        function cadastrarCupom(){
-            var cupom = $('#cupom').val()
-            var email = $('#email').val()
-            if(cupom == '' || email == ''){
-                alert('Existem campos obrigatórios não preenchidos!')
-            } else {
-                var dados = new FormData()
+        //limpa os campos ao clicar no 'x' e no botao 'fechar' do modal
+        function limpaCampos(){
+            document.getElementById('cupom').value=''
+            document.getElementById('email').value=''
+        }
 
-                dados.append('cupom', cupom)
-                dados.append('email', email)
+        function salvaNoBanco(){
+            var cupom = $("#cupom").val()
+            var email = $("#email").val()
+            
+            if(cupom == "" || email == ""){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Vish...',
+                    text: 'Você esqueceu de preencher alguns campos!',
+                    })
+            } else {
+             var dados = new FormData()
+
+                dados.append("cupom", cupom)
+                dados.append("email", email)
 
                 $.ajax({
                     type: 'POST',
                     url: '../controllers/indexController.php',
-                    data: dados,
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function(data) {
-                        alert('Cadastrado com sucesso!')
-                            //fecha o modal apos quase meio segundo
-                            setTimeout(function(){
-                                $('#salvaDados').modal('hide')
-                            }, 400)
+                    data: {
+                        cupom:$('#cupom').val(),
+                        email:$('#email').val()
                     },
                 })
-                //limpa os campos
-                document.getElementById('cupom').value=''
-                document.getElementById('email').value=''
-            }
-            //funcao para recarregar a pagina apos enviar para o banco
-                // var btn = document.querySelector('#salvaDados')
-                // btn.addEventListener('click', function(){
-                //     location.reload()
-                // })
-                // $('#form').submit(function(e){
-                //     e.preventDefault()
-                // })
-            }
-
-        //vai impedir que a pagina seja recarregada
-        // $('#form').submit(function(e){
-        //     e.preventDefault()
-
-            // //captura o valor dos inputs
-            // var cupom = $('#cupom').val()
-            // var email = $('#email').val()
-
-        //})
-            //funcao para registrar o cupom
-            // $(document).ready(function(){
-            //     $('#salvar').on('click', function(salvaCupom){
-            //         //alert('COROI')
-            //         $.ajax({
-            //             type: 'POST',
-            //             url: '../controllers/indexController.php/salvaBanco',
-            //             data: {
-            //                 cupom:$('#cupom').val(),
-            //                 email:$('#email').val()
-            //             },
-            //         })
-            //         alert('Cadastrado com sucesso!')
-            //         //fecha o modal apos quase meio segundo
-            //         setTimeout(function(){
-            //             $('#salvaDados').modal('hide')
-            //         }, 400)
-            //     })
-            //     //limpa os campos
-            //     document.getElementById('cupom').value=''
-            //     document.getElementById('email').value=''
-
-                //funcao para recarregar a pagina apos enviar para o banco
-                // var btn = document.querySelector('#salvar')
-                // btn.addEventListener('click', function(){
-                //     location.reload()
-                // })
-           // })
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Boa!...',
+                    text: 'As informações foram salvas com sucesso!',
+                    })
+                //fecha o modal apos 0,4 segundos
+                setTimeout(function() {
+                    $('#chamaModal').modal('hide');
+                }, 400);
+            //limpa os campos
+            document.getElementById('cupom').value=''
+            document.getElementById('email').value=''
+            } 
+        }
     </script>
     <title>Document</title>
 </head>
@@ -133,12 +101,12 @@ $indexController = new testeController();
 <!-- ===============modal================= -->
 
 
-<div class="modal fade" id="salvaDados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="chamaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpaCampos()"></button>
       </div>
       <div class="modal-body">
       <form action="testeIndex.php" id="form" method="POST">
@@ -155,8 +123,8 @@ $indexController = new testeController();
             </div><br>
             <div id="mensagens"></div> 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" id="salvaDados" class="btn btn-primary" onclick="cadastrarCupom()">Enviar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpaCampos()">Fechar</button>
+                <button type="button" id="salvar" class="btn btn-primary" onclick="salvaNoBanco()">Enviar</button>
             </div>
         </form>
       </div>

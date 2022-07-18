@@ -17,7 +17,7 @@ class testeController
     
     public function salvaBanco(){
 
-        //if(isset($_POST['salvaDados'])){
+        //if(isset($_POST['salvar'])){
         $cupom = $_POST['cupom'];
         $email = $_POST['email'];
         
@@ -28,8 +28,8 @@ class testeController
         } else {
             echo ("false");
         }
-    //}
-    }
+    
+   // }
 }
-
+}
 ?>
