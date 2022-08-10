@@ -9,17 +9,19 @@ require_once '../models/indexModel.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
 
-$indexModel = new testeModel();
-//$indexModel->salvaBanco($cupom, $email);
+//$indexModel = new testeModel();
+//$indexModel->salvaBanco();
+
 
 class testeController
 {
-    
     public function salvaBanco(){
 
-        //if(isset($_POST['salvar'])){
+
         $cupom = $_POST['cupom'];
         $email = $_POST['email'];
+
+        //if(isset($_POST['salvar'])){
         
         $camposCupom = new testeModel();
         
@@ -30,6 +32,6 @@ class testeController
         }
     
    // }
-}
+    }
 }
 ?>

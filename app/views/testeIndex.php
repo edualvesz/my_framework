@@ -55,31 +55,41 @@ $indexController->salvaBanco();
             var cupom = $("#cupom").val()
             var email = $("#email").val()
             
-            if(cupom == "" || email == ""){
+            if(cupom == ""){
                 Swal.fire({
                     icon: 'warning',
                     title: 'Vish...',
-                    text: 'Você esqueceu de preencher alguns campos!',
+                    text: 'Você esqueceu de informar o cupom!',
+                    })
+            } else if (email == ""){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Vish...',
+                    text: 'Você esqueceu de informar o email!',
                     })
             } else {
-             var dados = new FormData()
+            var dados = new FormData()
 
                 dados.append("cupom", cupom)
                 dados.append("email", email)
 
                 $.ajax({
-                    type: 'POST',
                     url: '../controllers/indexController.php',
-                    data: {
-                        cupom:$('#cupom').val(),
-                        email:$('#email').val()
+                    data: dados,
+                    processData: false,
+                    contentType: false,
+                    complete: function (response){
+                        //alert(response.responseText);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Boa!...',
+                            text: 'As informações foram salvas com sucesso!',
+                            })
                     },
+                    error:function(){
+                        alert("Erro");
+                    }
                 })
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Boa!...',
-                    text: 'As informações foram salvas com sucesso!',
-                    })
                 //fecha o modal apos 0,4 segundos
                 setTimeout(function() {
                     $('#chamaModal').modal('hide');
