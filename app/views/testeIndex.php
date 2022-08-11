@@ -75,10 +75,11 @@ $indexController->salvaBanco();
 
                 $.ajax({
                     url: '../controllers/indexController.php',
+                    type: 'POST',
                     data: dados,
                     processData: false,
-                    contentType: false,
-                    complete: function (response){
+                    // contentType: false,
+                    success: function salvaBanco(response){
                         //alert(response.responseText);
                         Swal.fire({
                             icon: 'success',
@@ -86,9 +87,9 @@ $indexController->salvaBanco();
                             text: 'As informações foram salvas com sucesso!',
                             })
                     },
-                    error:function(){
-                        alert("Erro");
-                    }
+                    // complete:function(){
+                    //     alert("Erro");
+                    // }
                 })
                 //fecha o modal apos 0,4 segundos
                 setTimeout(function() {
